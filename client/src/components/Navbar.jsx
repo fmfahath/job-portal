@@ -12,13 +12,13 @@ const Navbar = () => {
     return (
         <div className='shadow py-4'>
             <div className='container px-4 2xl:px-20 mx-auto flex justify-between items-center'>
-                <img src={assets.logo} alt="logo" />
+                <img className='max-sm:w-30' src={assets.logo} alt="logo" />
                 {
                     user ?
                         <div className='flex items-center gap-3'>
-                            <Link to={'/applications'}>Applied Jobs</Link>
+                            <Link to={'/applications'} className='max-sm:font-medium'>Applied Jobs</Link>
                             <p>|</p>
-                            <p>Hi, {user.firstName}</p>
+                            <p className='max-sm:hidden'>Hi, {user.firstName}</p>
                             <UserButton />
                         </div>
                         :
