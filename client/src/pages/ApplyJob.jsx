@@ -5,6 +5,7 @@ import Loading from '../components/Loading'
 import Navbar from '../components/Navbar'
 import { assets } from '../assets/assets'
 import moment from 'moment'
+import JobCard from '../components/JobCard'
 
 const ApplyJob = () => {
 
@@ -34,7 +35,9 @@ const ApplyJob = () => {
 
             <div className='min-h-screen flex flex-col py-10 container px-4 2xl:px-20 mx-auto'>
                 <div className='bg-white text-black rounded-lg w-full'>
-                    <div className='flex justify-center md:justify-between flex-wrap gap-8 px-14 py-20 mb-6 bg-sky-50 border border-sky-200 rounded-xl shadow-lg'>
+
+                    {/* job title - hero */}
+                    <div className='flex justify-center md:justify-between flex-wrap gap-8 px-14 py-20 mb-6 bg-sky-50 border border-sky-600 rounded-xl'>
                         <div className='flex flex-col md:flex-row items-center'>
                             <img className='h-24 bg-white rounded-lg p-4 mr-4 max-md:mb-4 border border-gray-200' src={jobData.companyId.image} alt="" />
                             <div className='text-center md:text-left text-neutral-700'>
@@ -59,10 +62,21 @@ const ApplyJob = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='flex flex-col justify-center text-end text-sm max-md:mx-auto max-md:text-center'>
-                            <button className='bg-blue-600 p-2.5 px10 text-white rounded cursor-pointer'>Apply Now</button>
+                        <div className='fl ex flex-col justify-center text-center text-sm max-md:mx-auto max-md:text-center'>
+                            <button className='bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer'>Apply Now</button>
                             <p className='mt-1 text-gray-600'>Posted {moment(jobData.date).fromNow()}</p>
                         </div>
+                    </div>
+
+                    {/* description */}
+                    <div className='flex flex-col lg:flex-row justify-between items-start'>
+                        <div className='w-full lg:w-2/3'>
+                            <h2 className='font-bold text-2xl mb-4'>Job Description</h2>
+                            <div className='rich-text' dangerouslySetInnerHTML={{ __html: jobData.description }}></div>
+                            <button className='bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer mt-10'>Apply Now</button>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
