@@ -26,7 +26,8 @@ const Hero = () => {
                 <div className='flex items-center justify-between bg-white rounded text-gray-600 max-w-xl pl-4 sm:mx-auto'>
                     <div className='flex items-center '>
                         <img className='h-4 sm:h-5' src={assets.search_icon} alt="" />
-                        <input type="text"
+                        <input
+                            type="text"
                             placeholder='Search for jobs'
                             className='max-sm:text-xs p-2 rounded outline-none w-full'
                             ref={titleRef}
@@ -34,7 +35,8 @@ const Hero = () => {
                     </div>
                     <div className='flex items-center '>
                         <img className='h-4 sm:h-5' src={assets.location_icon} alt="" />
-                        <input type="text"
+                        <input
+                            type="text"
                             placeholder='Location'
                             className='max-sm:text-xs p-2 rounded outline-none w-full'
                             ref={locationRef}
