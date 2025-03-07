@@ -11,6 +11,7 @@ const JobListing = () => {
     const [selectedCategories, setSelectedCategories] = useState([])
     const [selectedLocations, setSelectedLocations] = useState([])
     const [filteredJobs, setFilteredJobs] = useState(jobs)
+    const jobListDiv = document.getElementById("job-list")
 
     const handleCategoryChange = (category) => {
         setSelectedCategories(prev => prev.includes(category) ? prev.filter(c => c !== category) : [...prev, category])
@@ -80,10 +81,12 @@ const JobListing = () => {
                                 <input
                                     className='scale-125'
                                     type="checkbox"
+                                    id={`inputCategory-${index}`}
                                     onChange={() => handleCategoryChange(category)}
                                     checked={selectedCategories.includes(category)}
+                                    onClick={() => { jobListDiv.scrollIntoView({ behavior: "smooth" }) }}
                                 />
-                                {category}
+                                <label className='cursor-pointer' htmlFor={`inputCategory-${index}`}>{category}</label>
                             </li>
                         ))}
                     </ul>
@@ -98,10 +101,12 @@ const JobListing = () => {
                                 <input
                                     className='scale-125'
                                     type="checkbox"
+                                    id={`inputLocation-${index}`}
                                     onChange={() => handleLocationChange(location)}
                                     checked={selectedLocations.includes(location)}
+                                    onClick={() => { jobListDiv.scrollIntoView({ behavior: "smooth" }) }}
                                 />
-                                {location}
+                                <label className='cursor-pointer' htmlFor={`inputLocation-${index}`}>{location}</label>
                             </li>
                         ))}
                     </ul>

@@ -42,7 +42,7 @@ const Hero = () => {
                             ref={locationRef}
                         />
                     </div>
-                    <button onClick={onSearch} className='bg-blue-600 px-5 py-2 rounded m-1 text-white'>Search</button>
+                    <a onClick={onSearch} className='bg-blue-600 px-5 py-2 rounded m-1 text-white cursor-pointer' href="#job-list">Search</a>
                 </div>
             </div>
             <div className='border border-gray-300 shadow-md mx-2 mt-5 p-6 rounded-md flex '>

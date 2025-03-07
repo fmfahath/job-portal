@@ -4,3 +4,7 @@
 * {
     font-family: OutFit;
 }
+
+html {
+    scroll-behavior: smooth;
+}
