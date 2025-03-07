@@ -28,8 +28,8 @@ const RecruiterLogin = () => {
                     <>
                         <div className='flex items-center gap-4 my-10'>
                             <label htmlFor="image">
-                                <img className='w-16 rounded-full cursor-pointer' src={assets.upload_area} alt="" />
-                                <input type="file" id='image' hidden />
+                                <img className='w-16 rounded-full cursor-pointer' src={image ? URL.createObjectURL(image) : assets.upload_area} alt="" />
+                                <input onChange={(e) => setImage(e.target.files[0])} type="file" id='image' hidden />
                             </label>
                             <p>Upload Company <br />Logo</p>
                         </div>
@@ -53,9 +53,9 @@ const RecruiterLogin = () => {
                     </>
                 }
 
-                <p className='text-sm text-blue-600 my-4 cursor-pointer'>Forgot password?</p>
+                {state === 'Login' && <p className='text-sm text-blue-600 my-4 cursor-pointer'>Forgot password?</p>}
 
-                <button type='submit' className='bg-blue-600 w-full text-white py-2 mb-2 rounded-full cursor-pointer'>
+                <button type='submit' className='bg-blue-600 w-full text-white py-2 mt-4 mb-2 rounded-full cursor-pointer'>
                     {state === 'Login' ? 'Login' : isTextDataSubmitted ? 'Create Account' : 'Next'}
                 </button>
 
