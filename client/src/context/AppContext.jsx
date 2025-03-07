@@ -12,6 +12,7 @@ export const AppContextProvider = (props) => {
 
     const [isSearched, setIsSearched] = useState(false)
     const [jobs, setJobs] = useState([])
+    const [showRecruiterLogin, setShowRecruiterLogin] = useState(false)
 
     //fetch job data
     const fetchJobs = async () => {
@@ -27,6 +28,7 @@ export const AppContextProvider = (props) => {
         searchFilter, setSearchFilter,
         isSearched, setIsSearched,
         jobs, setJobs,
+        showRecruiterLogin, setShowRecruiterLogin
     }
 
 
