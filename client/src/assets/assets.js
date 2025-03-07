@@ -80,6 +80,7 @@ export const JobCategories = [
     "Management",
     "Marketing",
     "Cybersecurity",
+    "Cloud"
 ]
 
 export const JobLocations = [
@@ -285,7 +286,7 @@ export const jobsData = [
         </ol>`,
         salary: 53000,
         date: 1729681667114,
-        category: "Programming",
+        category: "Cloud",
     },
     {
         _id: '5',
@@ -450,7 +451,7 @@ export const jobsData = [
         </ol>`,
         salary: 96000,
         date: 1729681667114,
-        category: "Programming",
+        category: "Cloud",
     },
     {
         _id: '10',
@@ -681,7 +682,7 @@ export const jobsData = [
         </ol>`,
         salary: 74000,
         date: 1729681667114,
-        category: "Programming",
+        category: "Cloud",
     },
     {
         _id: '17',
@@ -912,6 +913,6 @@ export const jobsData = [
         </ol>`,
         salary: 102000,
         date: 1729681667114,
-        category: "Programming",
+        category: "Cloud",
     }
 ];

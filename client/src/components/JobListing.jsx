@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import { assets, JobCategories, JobLocations, } from '../assets/assets';
 import JobCard from './JobCard';
@@ -19,6 +19,21 @@ const JobListing = () => {
     const handleLocationChange = (location) => {
         setSelectedLocations(prev => prev.includes(location) ? prev.filter(c => c !== location) : [...prev, location])
     }
+
+    useEffect(() => {
+        const matchesCategory = job => selectedCategories.length === 0 || selectedCategories.includes(job.category)
+        const matchesLocation = job => selectedLocations.length === 0 || selectedLocations.includes(job.location)
+        const matchesSearchTitle = job => searchFilter.title === "" || job.title.toLowerCase().includes(searchFilter.title.toLowerCase())
+        const matchesSearchLocation = job => searchFilter.location === "" || job.location.toLowerCase().includes(searchFilter.location.toLowerCase())
+
+        const newFilteredJobs = jobs.slice().reverse().filter(
+            job => matchesCategory(job) && matchesLocation(job) && matchesSearchTitle(job) && matchesSearchLocation(job)
+        )
+
+        setFilteredJobs(newFilteredJobs)
+        setCurrentPage(1)
+
+    }, [jobs, selectedCategories, selectedLocations, searchFilter])
 
     return (
         <div className='container 2xl:px-20 mx-auto flex flex-col lg:flex-row max-lg:space-y-8 py-8'>
@@ -98,7 +113,7 @@ const JobListing = () => {
                 <h3 className='font-medium text-3xl py-2' id='job-list'>Latest Jobs</h3>
                 <p className='mb-8'>Get your desired job from top companies</p>
                 <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
-                    {jobs.slice((currentPage - 1) * 6, currentPage * 6).map((job, index) => (
+                    {filteredJobs.slice((currentPage - 1) * 6, currentPage * 6).map((job, index) => (
                         <JobCard key={index} job={job} />
                     ))}
                 </div>
