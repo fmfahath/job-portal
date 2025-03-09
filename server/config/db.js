@@ -6,7 +6,7 @@ const connectDB = async () => {
 
         await mongoose.connect(`${process.env.MONGODB_URI}/job-portal-db`);
     } catch (error) {
-        console.log("Database Error: ", error.messag)
+        console.log("Database Error: ", error.message)
     }
 }
 
