@@ -57,7 +57,31 @@ export const registerCompany = async (req, res) => {
 
 //company login
 export const loginCompany = async (req, res) => {
+    const { email, password } = req.body;
 
+    try {
+        const company = await companyModel.findOne({ email })
+
+        if (await bcrypt.compare(password, company.password)) {
+
+            const token = generateToken(company._id)
+
+            res.status(200).json({
+                success: true, company: {
+                    _id: company._id,
+                    name: company.name,
+                    email: company.email,
+                    image: company.image
+                },
+                token
+            })
+        }
+        else {
+            res.status(400).json({ success: false, message: "Invalid email or password" })
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message })
+    }
 }
 
 //get comanpy data
