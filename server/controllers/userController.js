@@ -32,6 +32,7 @@ export const clerkWebhooks = async (req, res) => {
                     res.json({ success: true, message: "User created successfully" })
 
                 } catch (error) {
+                    console.log("webhooks Error (user create): ", error.message);
                     res.json({ success: false, message: error.message })
                 }
 
@@ -50,6 +51,7 @@ export const clerkWebhooks = async (req, res) => {
                     res.json({ success: true, message: "User details updated successfully" })
 
                 } catch (error) {
+                    console.log("webhooks Error (user update): ", error.message);
                     res.json({ success: false, message: error.message })
                 }
 
@@ -62,6 +64,7 @@ export const clerkWebhooks = async (req, res) => {
                     res.json({ success: true, message: "User deleted successfully" })
 
                 } catch (error) {
+                    console.log("webhooks Error (user delete): ", error.message);
                     res.json({ success: false, message: error.message })
                 }
 
@@ -75,6 +78,8 @@ export const clerkWebhooks = async (req, res) => {
 
 
     } catch (error) {
+        console.log("webhooks Error: ", error.message);
+
         res.json({ success: false, message: "webhooks error" })
     }
 }
