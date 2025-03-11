@@ -1,6 +1,7 @@
 import companyModel from "../models/companyModel.js";
 import bcrypt from 'bcrypt'
 import { v2 as cloudinary } from 'cloudinary'
+import generateToken from "../utils/generateToken.js";
 
 
 //register new company
@@ -33,18 +34,22 @@ export const registerCompany = async (req, res) => {
             image: imageUpload.secure_url
         })
 
+        //generate token
+        const token = generateToken(company._id)
+
         res.status(201).json({
-            success: success, company: {
+            success: "true", company: {
                 _id: company._id,
                 name: company.name,
                 email: company.email,
                 image: company.image
-            }
+            },
+            token
         })
 
 
     } catch (error) {
-
+        res.status(500).json({ success: false, message: error.message })
     }
 
 
