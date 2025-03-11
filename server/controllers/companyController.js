@@ -1,8 +1,34 @@
+import companyModel from "../models/companyModel.js";
+import bcrypt from 'bcrypt'
 
 
 
 //register new company
 export const registerCompany = async (req, res) => {
+    const { name, email, image, password } = req.body;
+    const imageFile = req.file;
+
+    if (!name || !email || !imageFile || !password) {
+        return res.status(400).json({ success: false, message: "Missing details (name, email, image and password required" })
+    }
+
+    try {
+        const companyExist = await companyModel.findOne({ email })
+
+        if (companyExist) {
+            return res.status(400).json({ success: false, message: "Email already registered" })
+        }
+
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt)
+
+
+
+
+    } catch (error) {
+
+    }
+
 
 }
 

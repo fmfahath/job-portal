@@ -1,9 +1,10 @@
 import express from 'express'
 import { changeJobApplicationsStatus, changeJobVisibility, getCompanyData, getCompanyJobApplicants, getCompanyPostedJobs, loginCompany, postJob, registerCompany } from '../controllers/companyController.js'
+import upload from '../middlewares/multer.js'
 
 const comapnyRouter = express.Router()
 
-comapnyRouter.post('/register', registerCompany)
+comapnyRouter.post('/register', upload.single('image'), registerCompany)
 comapnyRouter.post('/login', loginCompany)
 comapnyRouter.get('/company', getCompanyData)
 comapnyRouter.post('/post-job', postJob)
