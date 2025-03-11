@@ -11,6 +11,7 @@ const protectCompany = async (req, res, next) => {
     try {
         const decoded_token = jwt.verify(token, process.env.JWT_SECRET)
 
+
         if (!decoded_token) {
             return res.status(401).json({ success: false, message: "Invalid token or token expired" })
         }
