@@ -7,7 +7,7 @@ import jobsModel from "../models/jobsMOdel.js";
 
 //register new company
 export const registerCompany = async (req, res) => {
-    const { name, email, image, password } = req.body;
+    const { name, email, password } = req.body;
     const imageFile = req.file;
 
     if (!name || !email || !imageFile || !password) {
