@@ -4,11 +4,11 @@ import cors from 'cors'
 import 'dotenv/config'
 import connectDB from './config/db.js';
 import * as Sentry from "@sentry/node"
-import { clerkWebhooks } from './controllers/userController.js';
 import comapnyRouter from './routes/comapnyRoutes.js';
 import connectCloudinary from './config/cloudinary.js';
 // import jobsRouter from './routes/jobsRoute.js';
 import jobRoute from './routes/jobsRoute.js'
+import { clerkWebhooks } from './controllers/webhookController.js';
 
 
 //initialize express
