@@ -6,10 +6,10 @@ import connectDB from './config/db.js';
 import * as Sentry from "@sentry/node"
 import comapnyRouter from './routes/comapnyRoutes.js';
 import connectCloudinary from './config/cloudinary.js';
-// import jobsRouter from './routes/jobsRoute.js';
 import jobRoute from './routes/jobsRoute.js'
 import { clerkWebhooks } from './controllers/webhookController.js';
 import usersRouter from './routes/usersRoutes.js';
+import { clerkMiddleware } from '@clerk/express'
 
 
 //initialize express
@@ -22,7 +22,7 @@ await connectCloudinary();
 //middlewares
 app.use(cors())
 app.use(express.json())
-
+app.use(clerkMiddleware())
 
 //routes
 app.get('/', (req, res) => res.send('API working...'))
