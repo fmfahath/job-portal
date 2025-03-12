@@ -7,11 +7,11 @@ const comapnyRouter = express.Router()
 
 comapnyRouter.post('/register', upload.single('image'), registerCompany)
 comapnyRouter.post('/login', loginCompany)
-comapnyRouter.get('/company', protectCompany, getCompanyData)
+comapnyRouter.get('/', protectCompany, getCompanyData)
 comapnyRouter.post('/post-job', protectCompany, postJob)
 comapnyRouter.get('/list-jobs', protectCompany, getCompanyPostedJobs)
 comapnyRouter.get('/applicants', protectCompany, getCompanyJobApplicants)
 comapnyRouter.post('/change-status', protectCompany, changeJobApplicationsStatus)
-comapnyRouter.post('/change-visibility', changeJobVisibility)
+comapnyRouter.post('/change-visibility', protectCompany, changeJobVisibility)
 
 export default comapnyRouter;

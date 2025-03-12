@@ -88,6 +88,14 @@ export const loginCompany = async (req, res) => {
 //get comanpy data
 export const getCompanyData = async (req, res) => {
 
+    try {
+        const company = req.company
+
+        res.status(200).json({ success: true, company })
+
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message })
+    }
 }
 
 //psot a new job
@@ -123,7 +131,16 @@ export const getCompanyJobApplicants = async (req, res) => {
 
 //get company posted jobs
 export const getCompanyPostedJobs = async (req, res) => {
+    try {
+        const companyId = req.company._id
 
+        const jobs = await jobsModel.find({ companyId })
+
+        res.status(200).json({ success: true, jobsData: jobs })
+
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message })
+    }
 }
 
 //change job apllication status
@@ -133,5 +150,22 @@ export const changeJobApplicationsStatus = async (req, res) => {
 
 //change job visibility
 export const changeJobVisibility = async (req, res) => {
+    try {
 
+        const { id } = req.body
+        const companyId = req.company._id
+
+        const job = await jobsModel.findById(id)
+
+        if (companyId.toString() === job.companyId.toString()) {
+            job.visible = !job.visible
+        }
+
+        await job.save()
+
+        res.status(200).json({ success: true, job })
+
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message })
+    }
 }
