@@ -11,7 +11,7 @@ export const registerCompany = async (req, res) => {
     const imageFile = req.file;
 
     if (!name || !email || !imageFile || !password) {
-        return res.status(400).json({ success: false, message: "Missing details (name, email, image and password required" })
+        return res.json({ success: false, message: "Missing details (name, email, image and password required" })
     }
 
     try {
