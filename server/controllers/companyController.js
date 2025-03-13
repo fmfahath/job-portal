@@ -162,13 +162,13 @@ export const changeJobVisibility = async (req, res) => {
         const { id } = req.body
         const companyId = req.company._id
 
-        const job = await jobsModel.findById(id)
+        let job = await jobsModel.findById(id)
 
         if (companyId.toString() === job.companyId.toString()) {
             job.visible = !job.visible
         }
 
-        await job.save()
+        job = await job.save()
 
         res.status(200).json({ success: true, job })
 
