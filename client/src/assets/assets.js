@@ -77,20 +77,18 @@ export const JobCategories = [
     "Data Science",
     "Designing",
     "Networking",
+    "System Engineering",
     "Management",
     "Marketing",
     "Cybersecurity",
-    "Cloud"
+    "Cloud",
+    "DevOps"
 ]
 
 export const JobLocations = [
-    "Bangalore",
-    "Washington",
-    "Hyderabad",
-    "Mumbai",
-    "California",
-    "Chennai",
-    "New York"
+    "Colombo",
+    "Remote",
+    "Hybrid"
 ]
 
 // Sample data for Manage Jobs Page
