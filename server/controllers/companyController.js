@@ -117,7 +117,7 @@ export const postJob = async (req, res) => {
 
         await newJob.save()
 
-        res.status(201).json({ success: true, newJob })
+        res.status(201).json({ success: true, message: "Job posted successfully", newJob })
     } catch (error) {
         res.status(500).json({ success: false, message: error.message })
     }
