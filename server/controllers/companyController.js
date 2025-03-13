@@ -18,7 +18,7 @@ export const registerCompany = async (req, res) => {
         const companyExist = await companyModel.findOne({ email })
 
         if (companyExist) {
-            return res.status(400).json({ success: false, message: "Email already registered" })
+            return res.json({ success: false, message: "Email already registered" })
         }
 
         const salt = await bcrypt.genSalt(10)
