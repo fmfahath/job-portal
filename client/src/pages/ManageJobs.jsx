@@ -35,8 +35,6 @@ const ManageJobs = () => {
                 { headers: { token: companyToken } }
             )
 
-            console.log(data);
-
             if (data.success) {
                 // toast.success('Visibility Changed')
                 fetchCompanyJobs()
