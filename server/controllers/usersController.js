@@ -61,7 +61,7 @@ export const getUserJobApplications = async (req, res) => {
         const userId = req.auth.userId
 
         const applications = await jobApplicationModel.find({ userId })
-            .populate('companyID', 'name email image')
+            .populate('companyId', 'name email image')
             .populate('jobId', 'title description location category level salary')
             .exec()
 
