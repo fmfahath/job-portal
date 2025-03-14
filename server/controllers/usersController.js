@@ -33,7 +33,7 @@ export const applyForJob = async (req, res) => {
         const isAlreadyApplied = await jobApplicationModel.find({ jobId, userId })
 
         if (isAlreadyApplied.length > 0) {
-            return res.status(409).json({ success: false, message: "User already applied to this job" })
+            return res.status(200).json({ success: false, message: "User already applied to this job" })
         }
 
         const jobData = await jobsModel.findById(jobId)
