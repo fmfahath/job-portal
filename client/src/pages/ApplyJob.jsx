@@ -16,10 +16,12 @@ const ApplyJob = () => {
 
     const { id } = useParams()
     const [jobData, setJobData] = useState(null)
-    const { jobs, backendUrl, userData } = useContext(AppContext)
+    const { jobs, backendUrl, userData, userApplications, fetchUsersApplication } = useContext(AppContext)
     const navigate = useNavigate()
     const { getToken } = useAuth()
+    const [isAlreadyApplied, setIsAlreadyApplied] = useState(false)
 
+    // get job
     const fetchJob = async () => {
         try {
             const { data } = await axios.get(`${backendUrl}/api/jobs/${id}`)
@@ -56,6 +58,7 @@ const ApplyJob = () => {
 
             if (data.success) {
                 toast.success(data.message)
+                await fetchUsersApplication()
             }
             else {
                 toast.error(data.message)
@@ -66,9 +69,24 @@ const ApplyJob = () => {
         }
     }
 
+    //check already applied or not
+    const checkAlreadyApplied = () => {
+        const hasApplied = userApplications.some(item => item.jobId._id === jobData._id)
+        setIsAlreadyApplied(hasApplied)
+    }
+
+
     useEffect(() => {
         fetchJob()
     }, [id])
+
+
+    useEffect(() => {
+        if (userApplications.length > 0 && jobData) {
+            checkAlreadyApplied()
+        }
+    }, [jobData, userApplications, id])
+
 
     return jobData ? (
         <>
@@ -104,7 +122,7 @@ const ApplyJob = () => {
                             </div>
                         </div>
                         <div className='fl ex flex-col justify-center text-center text-sm max-md:mx-auto max-md:text-center'>
-                            <button className='bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer' onClick={applyHandler}>Apply Now</button>
+                            <button className={isAlreadyApplied ? 'bg-blue-300 p-2.5 px-10 text-white rounded cursor-not-allowed' : 'bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer'} onClick={applyHandler} disabled={isAlreadyApplied && true}>{isAlreadyApplied ? "Already Applied" : "Apply Now"}</button>
                             <p className='mt-1 text-gray-600'>Posted {moment(jobData.date).fromNow()}</p>
                         </div>
                     </div>
@@ -114,7 +132,7 @@ const ApplyJob = () => {
                         <div className='w-full lg:w-2/3'>
                             <h2 className='font-bold text-2xl mb-4'>Job Description</h2>
                             <div className='rich-text' dangerouslySetInnerHTML={{ __html: jobData.description }}></div>
-                            <button className='bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer mt-10' onClick={applyHandler}>Apply Now</button>
+                            <button className={isAlreadyApplied ? 'bg-blue-300 p-2.5 px-10 text-white rounded cursor-not-allowed' : 'bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer'} onClick={applyHandler} disabled={isAlreadyApplied && true}>{isAlreadyApplied ? "Already Applied" : "Apply Now"}</button>
                         </div>
 
                         {/* right section */}
