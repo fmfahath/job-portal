@@ -85,11 +85,11 @@ export const updateUserResume = async (req, res) => {
         const userData = await userModel.findById(userId)
 
         if (!userData) {
-            return res.status(404).json({ success: false, message: "User details not found" })
+            return res.status(404).json({ success: false, message: "User details not found", userId, resumeFile })
         }
 
         if (resumeFile) {
-            const resumeUpload = await cloudinary.uploader.upload(resumeFile)
+            const resumeUpload = await cloudinary.uploader.upload(resumeFile.path)
             userData.resume = resumeUpload.secure_url
         }
 
