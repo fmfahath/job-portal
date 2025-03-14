@@ -1,18 +1,18 @@
 import React, { useContext, useState } from 'react'
 import Navbar from '../components/Navbar'
-import { assets, jobsApplied } from '../assets/assets'
 import moment from 'moment'
 import Footer from '../components/Footer'
 import { AppContext } from '../context/AppContext'
 import { useAuth, useUser } from '@clerk/clerk-react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { assets } from '../assets/assets.js'
 
 const Applications = () => {
 
     const [isEdit, setIsEdit] = useState(false)
     const [resume, setResume] = useState(null)
-    const { backendUrl, fetchUserData, userData } = useContext(AppContext)
+    const { backendUrl, fetchUserData, userData, userApplications } = useContext(AppContext)
     const { user } = useUser()
     const { getToken } = useAuth()
 
@@ -22,9 +22,6 @@ const Applications = () => {
     const uploadResume = async () => {
         try {
 
-            if (!resume) {
-                return toast.error("Please Upload resume")
-            }
             const formData = new FormData()
             formData.append('resume', resume)
 
@@ -70,7 +67,7 @@ const Applications = () => {
                             </>
                             :
                             <div className='flex gap-2'>
-                                <a href="" className='bg-blue-100 text-blue-600 px-4 py-2 rounded-lg cursor-pointer'>
+                                <a href={userData && userData.resume} target='_blank' className='bg-blue-100 text-blue-600 px-4 py-2 rounded-lg cursor-pointer'>
                                     Resume
                                 </a>
                                 <button onClick={() => setIsEdit(true)} className='text-gray-500 border border-gray-300 rounded-lg px-4 py-2 cursor-pointer'>
@@ -91,21 +88,21 @@ const Applications = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {jobsApplied.map((job, index) => true ? (
+                        {userApplications.map((job, index) => true ? (
                             <tr key={index}>
                                 <td className='py-3 px-4 flex items-center gap-2 border-b border-gray-300'>
-                                    <img className='w-8 h-8' src={job.logo} alt="" />
-                                    {job.company}
+                                    <img className='w-8 h-8' src={job.companyId.image} alt="" />
+                                    {job.companyId.name}
                                 </td>
                                 <td className='py-2 px-4 border-b border-gray-300'>
-                                    {job.title}
+                                    {job.jobId.title}
                                 </td>
                                 <td className='py-2 px-4 border-b border-gray-300 max-sm:hidden'>
-                                    {job.location}
+                                    {job.jobId.location}
                                 </td>
                                 <td className='py-2 px-4 border-b border-gray-300 max-sm:hidden'>
-                                    {/* {moment(job.date).format('ll')} */}
-                                    {job.date}
+                                    {moment(job.date).format('ll')}
+                                    {/* {job.date} */}
                                 </td>
                                 <td className='py-2 px-4 border-b border-gray-300'>
                                     <span className={`${job.status === 'Accepted' ? 'bg-green-100' : job.status === 'Rejected' ? 'bg-red-100' : 'bg-blue-100'} px-4 py-1.5`}>{job.status}</span>
