@@ -138,11 +138,23 @@ const ApplyJob = () => {
                         {/* right section */}
                         <div className='w-full lg:w-1/3 mt-8 lg:mt-0 lg:ml-8 space-y-5'>
                             <h2>More Jobs from {jobData.companyId.name}</h2>
-                            {jobs.filter(job => job._id !== jobData._id && job.companyId._id === jobData.companyId._id)
+
+                            {/* filter and display jobs of the same company exclude current diplayed job */}
+                            {/* {jobs.filter(job => job._id !== jobData._id && job.companyId._id === jobData.companyId._id)
                                 .filter(job => true).slice(0, 4)
                                 .map((job, index) => (
                                     <JobCard key={index} job={job} />
-                                ))}
+                                ))} */}
+
+                            {/* filter and display jobs of the same company exclude current diplayed & applied job */}
+                            {jobs.filter(job => job._id !== jobData._id && job.companyId._id === jobData.companyId._id)
+                                .filter(job => {
+                                    const appliedJobsIds = new Set(userApplications.map(app => app.jobId && app.jobId._id))
+                                    return !appliedJobsIds.has(job._id)
+                                })
+                                .map((job, index) => {
+                                    return <JobCard key={index} job={job} index={index} />
+                                })}
                         </div>
                     </div>
                 </div>
