@@ -25,6 +25,25 @@ const VIewApplications = () => {
         }
     }
 
+    //application status changer
+    const changeApplicationsStatus = async (id, status) => {
+        try {
+            const { data } = await axios.post(`${backendUrl}/api/company/change-status`,
+                { id, status },
+                { headers: { token: companyToken } }
+            )
+
+            if (data.success) {
+                fetchJobApplications()
+            }
+            else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     useEffect(() => {
         if (companyToken) {
             fetchJobApplications()
@@ -61,13 +80,19 @@ const VIewApplications = () => {
                                     </a>
                                 </td>
                                 <td className='py-2 px-4 border-b border-gray-200 relative'>
-                                    <div className='relative inline-block text-left group'>
-                                        <button className='text-gray-500 action-button cursor-pointer'>...</button>
-                                        <div className='z-10 hidden absolute right-0 md:left-0 top-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow group-hover:block'>
-                                            <button className='block  w-full text-left px-4 py-2 text-blue-500 hover:bg-gray-100 cursor-pointer'>Accept</button>
-                                            <button className='block  w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100 cursor-pointer'>Rejected</button>
+                                    {applicant.status == "Pending" ?
+                                        <div className='relative inline-block text-left group'>
+                                            <button className='text-gray-500 action-button cursor-pointer'>...</button>
+                                            <div className='z-10 hidden absolute right-0 md:left-0 top-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow group-hover:block'>
+                                                <button className='block  w-full text-left px-4 py-2 text-blue-500 hover:bg-gray-100 cursor-pointer' onClick={() => changeApplicationsStatus(applicant._id, "Accepted")}>Accept</button>
+                                                <button className='block  w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100 cursor-pointer' onClick={() => changeApplicationsStatus(applicant._id, "Rejected")}>Rejected</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                        :
+                                        <div>
+                                            {applicant.status}
+                                        </div>
+                                    }
                                 </td>
                             </tr>
                         ))}
