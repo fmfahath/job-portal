@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { use, useContext, useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import moment from 'moment'
 import Footer from '../components/Footer'
@@ -12,7 +12,7 @@ const Applications = () => {
 
     const [isEdit, setIsEdit] = useState(false)
     const [resume, setResume] = useState(null)
-    const { backendUrl, fetchUserData, userData, userApplications } = useContext(AppContext)
+    const { backendUrl, fetchUserData, userData, userApplications, fetchUsersApplication } = useContext(AppContext)
     const { user } = useUser()
     const { getToken } = useAuth()
 
@@ -47,6 +47,12 @@ const Applications = () => {
         setIsEdit(false)
         setResume(null)
     }
+
+    useEffect(() => {
+        if (user) {
+            fetchUsersApplication()
+        }
+    }, [user])
 
 
     return (

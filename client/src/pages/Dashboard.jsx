@@ -63,7 +63,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* right side  */}
-                <div>
+                <div className='flex-1 justify-center items-center'>
                     <Outlet />
                 </div>
             </div>
