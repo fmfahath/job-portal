@@ -1,5 +1,5 @@
 import jobApplicationModel from "../models/jobApplicationModel.js"
-import jobsModel from "../models/jobsMOdel.js"
+import jobsModel from "../models/jobsModel.js"
 import userModel from "../models/userModel.js"
 import { v2 as cloudinary } from 'cloudinary'
 

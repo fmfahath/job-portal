@@ -2,7 +2,7 @@ import companyModel from "../models/companyModel.js";
 import bcrypt from 'bcrypt'
 import { v2 as cloudinary } from 'cloudinary'
 import generateToken from "../utils/generateToken.js";
-import jobsModel from "../models/jobsMOdel.js";
+import jobsModel from "../models/jobsModel.js";
 import jobApplicationModel from "../models/jobApplicationModel.js";
 
 

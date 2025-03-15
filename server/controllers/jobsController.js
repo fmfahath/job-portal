@@ -1,4 +1,4 @@
-import jobsModel from "../models/jobsMOdel.js"
+import jobsModel from "../models/jobsModel.js"
 
 
 //get all jobs
