@@ -1,7 +1,36 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { assets, viewApplicationsPageData } from '../assets/assets'
+import { AppContext } from '../context/AppContext'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const VIewApplications = () => {
+
+    const { backendUrl, companyToken } = useContext(AppContext)
+    const [applicants, setApplicants] = useState([])
+
+    //fetch job applications 
+    const fetchJobApplications = async () => {
+        try {
+            const { data } = await axios.get(`${backendUrl}/api/company/applicants`, { headers: { token: companyToken } })
+
+            if (data.success) {
+                setApplicants(data.applications)
+            }
+            else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    useEffect(() => {
+        if (companyToken) {
+            fetchJobApplications()
+        }
+    }, [companyToken])
+
     return (
         <div className='container mx-auto p-4'>
             <div>
@@ -17,17 +46,17 @@ const VIewApplications = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {viewApplicationsPageData.map((applicant, index) => (
+                        {applicants.map((applicant, index) => (
                             <tr key={index} className='text-gray-700'>
-                                <td className='py-2 px-4 border-b border-gray-200 text-center'>{index + 1}</td>
-                                <td className='py-2 px-4 border-b border-gray-200 text-center flex items-center'>
-                                    <img className='w-10 h-10 rounded-full mr-3 max-sm:hidden' src={applicant.imgSrc} alt="" />
-                                    <span>{applicant.name}</span>
+                                <td className='py-2 px-4 border-b border-gray-200 '>{index + 1}</td>
+                                <td className='py-2 px-4 border-b border-gray-200  flex items-center'>
+                                    <img className='w-10 h-10 rounded-full mr-3 max-sm:hidden' src={applicant.userId.image} alt="" />
+                                    <span>{applicant.userId.name}</span>
                                 </td>
-                                <td className='py-2 px-4 border-b border-gray-200 text-center max-sm:hidden'>{applicant.jobTitle}</td>
-                                <td className='py-2 px-4 border-b border-gray-200 text-center max-sm:hidden'>{applicant.location}</td>
+                                <td className='py-2 px-4 border-b border-gray-200  max-sm:hidden'>{applicant.jobId.title}</td>
+                                <td className='py-2 px-4 border-b border-gray-200  max-sm:hidden'>{applicant.jobId.location}</td>
                                 <td className='py-2 px-4 border-b border-gray-200'>
-                                    <a href="" traget='_blank' className='bg-blue-50 text-blue-400 px-3 py-1 rounded inline-flex gap-2 items-center'>
+                                    <a href={applicant.userId.resume} target='_blank' className='bg-blue-50 text-blue-400 px-3 py-1 rounded inline-flex gap-2 items-center'>
                                         Resume <img src={assets.resume_download_icon} alt="" />
                                     </a>
                                 </td>

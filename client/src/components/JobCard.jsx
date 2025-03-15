@@ -2,10 +2,7 @@ import React from 'react'
 import { assets } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
 
-const JobCard = ({ job, index }) => {
-
-    console.log("job card: " + index + ": ", job);
-
+const JobCard = ({ job }) => {
 
     const navigate = useNavigate()
 

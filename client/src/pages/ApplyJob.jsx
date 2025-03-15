@@ -153,7 +153,7 @@ const ApplyJob = () => {
                                     return !appliedJobsIds.has(job._id)
                                 })
                                 .map((job, index) => {
-                                    return <JobCard key={index} job={job} index={index} />
+                                    return <JobCard key={index} job={job} />
                                 })}
                         </div>
                     </div>
