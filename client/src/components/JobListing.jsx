@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import { assets, JobCategories, JobLocations, } from '../assets/assets';
 import JobCard from './JobCard';
+import Loading from './Loading';
 
 const JobListing = () => {
 
@@ -31,7 +32,7 @@ const JobListing = () => {
             job => matchesCategory(job) && matchesLocation(job) && matchesSearchTitle(job) && matchesSearchLocation(job)
         )
 
-        setFilteredJobs(newFilteredJobs)
+        // setFilteredJobs(newFilteredJobs)
         setCurrentPage(1)
 
     }, [jobs, selectedCategories, selectedLocations, searchFilter])
@@ -124,7 +125,7 @@ const JobListing = () => {
                 </div>
 
                 {/* pagination */}
-                {filteredJobs.length > 0 && (
+                {filteredJobs.length > 0 ? (
                     <div className='flex items-center justify-center space-x-2 mt-10'>
                         <a href="#job-list">
                             <img onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))} src={assets.left_arrow_icon} alt="" />
@@ -138,7 +139,11 @@ const JobListing = () => {
                             <img onClick={() => setCurrentPage(Math.min(currentPage + 1, Math.ceil(filteredJobs.length / 6)))} src={assets.right_arrow_icon} alt="" />
                         </a>
                     </div>
-                )}
+                ) :
+                    <div className='max-h-[30vh] flex justify-center items-center'>
+                        <Loading />
+                    </div>
+                }
             </section>
         </div>
     )
