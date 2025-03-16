@@ -32,7 +32,7 @@ const JobListing = () => {
             job => matchesCategory(job) && matchesLocation(job) && matchesSearchTitle(job) && matchesSearchLocation(job)
         )
 
-        // setFilteredJobs(newFilteredJobs)
+        setFilteredJobs(newFilteredJobs)
         setCurrentPage(1)
 
     }, [jobs, selectedCategories, selectedLocations, searchFilter])
