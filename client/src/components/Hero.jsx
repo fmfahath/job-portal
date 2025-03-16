@@ -23,26 +23,26 @@ const Hero = () => {
             <div className='bg-gradient-to-r from-purple-800 to-purple-950 text-white py-16 px-4 mx-2 text-center rounded-xl'>
                 <h2 className='text-2xl md:text-3xl lg:text-4xl font-medium mb-4'>Over 10,000 Jobs to Apply</h2>
                 <p className='mb-8 max-w-xl mx-auto text-sm font-light px-5'>Your Next Big Career Move Starts Right Here - Explore the Best Job Opportunities and Take the First Step Toward Your Future!</p>
-                <div className='flex items-center justify-between bg-white rounded text-gray-600 max-w-xl pl-4 sm:mx-auto'>
-                    <div className='flex items-center '>
+                <div className='flex flex-col sm:flex-row items-center justify-between sm:bg-white rounded text-gray-600 max-w-xl pl-4 mx-auto'>
+                    <div className='flex items-center bg-white px-4 py-2 sm:px-0 sm:py-0  rounded-xl w-full'>
                         <img className='h-4 sm:h-5' src={assets.search_icon} alt="" />
                         <input
                             type="text"
                             placeholder='Search for jobs'
-                            className='max-sm:text-xs p-2 rounded outline-none w-full'
+                            className='max-sm:text-sm p-2 rounded outline-none w-full'
                             ref={titleRef}
                         />
                     </div>
-                    <div className='flex items-center '>
+                    <div className='flex items-center bg-white px-4 py-2 sm:px-0 sm:py-0 rounded-xl my-2 sm:my-0 w-full'>
                         <img className='h-4 sm:h-5' src={assets.location_icon} alt="" />
                         <input
                             type="text"
                             placeholder='Location'
-                            className='max-sm:text-xs p-2 rounded outline-none w-full'
+                            className='max-sm:text-sm p-2 rounded outline-none w-full'
                             ref={locationRef}
                         />
                     </div>
-                    <a onClick={onSearch} className='bg-blue-600 px-5 py-2 rounded m-1 text-white cursor-pointer' href="#job-list">Search</a>
+                    <a onClick={onSearch} className='bg-blue-600 px-8 py-2 rounded m-1 text-white cursor-pointer' href="#job-list">Search</a>
                 </div>
             </div>
             <div className='border border-gray-300 shadow-md mx-2 mt-5 p-6 rounded-md flex '>
