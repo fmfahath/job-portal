@@ -1,5 +1,5 @@
 <div align='center'>
-  <h1>MERN FUll Stack Job Portal Website</h1>
+  <h1>MERN Full Stack Job Portal Website</h1>
   <h3>React.js | Tailwind CSS | Node.js | Express.js | MongoDB | Cloudinary | Clerk Auth | Sentry | Vercel </h3>
   <img src='https://img.shields.io/badge/fmfahath-white?logo=github&logoColor=black'/>
   
